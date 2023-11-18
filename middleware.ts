@@ -1,4 +1,4 @@
-import { authOptions } from '@/nextAuth';
+import { authOptions } from '@/app/nextAuth';
 import NextAuth from 'next-auth';
 
 export const middleware = NextAuth(authOptions).auth;
