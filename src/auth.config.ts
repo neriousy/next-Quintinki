@@ -1,20 +1,8 @@
-import NextAuth from 'next-auth';
-
 import type { NextAuthConfig } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
-import { getDiscordUserInfo } from './api/auth/[...nextauth]/utils';
+import { getDiscordUserInfo } from './app/lib/auth/utils';
 
-export const authOptions = {
-  providers: [
-    DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
-      checks: ['state', 'pkce'],
-      authorization: {
-        params: { scope: 'identify guilds.members.read' },
-      },
-    }),
-  ],
+export const authConfig = {
   callbacks: {
     async session({ session, token }: { session: any; token: any }) {
       session.user.id = token.id;
@@ -42,4 +30,13 @@ export const authOptions = {
       return token;
     },
   },
+  providers: [
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID as string,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+      checks: ['state', 'pkce'],
+      authorization:
+        'https://discord.com/api/oauth2/authorize?scope=identify%20guilds.members.read',
+    }),
+  ],
 } satisfies NextAuthConfig;

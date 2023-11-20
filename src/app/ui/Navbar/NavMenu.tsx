@@ -9,7 +9,7 @@ import LogoutButton from './LogoutButton';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-export default function NavMenu({ image }: { image: string }) {
+export default function NavDropdownMenu({ image }: { image: string }) {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

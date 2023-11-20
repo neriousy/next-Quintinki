@@ -1,14 +1,13 @@
-import { auth, signIn } from '@/auth';
 import Image from 'next/image';
 import Links from './Links';
-import NavMenu from './NavMenu';
+import NavDropdownMenu from './NavMenu';
 import { Button } from '@mui/material';
+import { auth, signIn } from '@/auth';
 
 export default async function Navbar() {
   const session = await auth();
   const image = session?.user?.image || '';
   const nick = session?.nick;
-  console.log(session);
 
   return (
     <header className="w-full border-white box shadow-divider">
@@ -20,6 +19,7 @@ export default async function Navbar() {
               alt="Quintin logo"
               width={150}
               height={150}
+              className="h-auto"
             />
           </li>
 
@@ -30,7 +30,7 @@ export default async function Navbar() {
               <form
                 action={async () => {
                   'use server';
-                  const url = await signIn('discord');
+                  await signIn('discord');
                 }}
               >
                 <Button type="submit">Zaloguj się</Button>
@@ -41,7 +41,7 @@ export default async function Navbar() {
           {session && (
             <li className="flex items-center ml-auto mr-3 gap-3">
               <span className="text-2xl">{nick}</span>
-              <NavMenu image={image} />
+              <NavDropdownMenu image={image} />
             </li>
           )}
         </ul>

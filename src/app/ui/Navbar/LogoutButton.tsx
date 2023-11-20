@@ -1,4 +1,4 @@
-import { logout } from '@/app/lib/authFunctions';
+import { logout } from '@/app/lib/auth/auth';
 import Logout from '@mui/icons-material/Logout';
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 

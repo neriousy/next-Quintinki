@@ -1,4 +1,4 @@
-import { auth, signIn } from '@/auth';
+import { auth, signIn } from '../../auth';
 
 export default async function Layout() {
   const session = await auth();
