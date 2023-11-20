@@ -1,3 +1,7 @@
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false;
+
 import '@/app/ui/global.css';
 import Navbar from './ui/Navbar/Navbar';
 
@@ -13,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black">
+      <body className="bg-black text-white">
         <Navbar />
         {children}
       </body>

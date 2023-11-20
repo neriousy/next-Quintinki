@@ -10,9 +10,8 @@ const authOptions = {
       clientId: process.env.DISCORD_CLIENT_ID as string,
       clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
       checks: ['state', 'pkce'],
-      authorization: {
-        params: { scope: 'identify guilds.members.read' },
-      },
+      authorization:
+        'https://discord.com/api/oauth2/authorize?scope=identify%20guilds.members.read',
     }),
   ],
   callbacks: {

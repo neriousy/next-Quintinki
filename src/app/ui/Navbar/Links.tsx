@@ -39,7 +39,7 @@ function NavLink({
 }) {
   const color = active ? 'text-blue-400' : 'text-navText';
   return (
-    <li className={`ml-10 ${color} hover:text-blue-300`}>
+    <li className={`${color} hover:text-blue-300`}>
       <Link href={href}>{text}</Link>
     </li>
   );
