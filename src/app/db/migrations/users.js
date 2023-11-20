@@ -6,10 +6,12 @@ async function users(client) {
 
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS users (
-        discord_id VARCHAR(255) PRIMARY KEY
-        discord_nick VARCHAR(255) NOT NULL
-        discord_quintin_nick VARCHAR(255)
-        )`;
+        discord_id VARCHAR(255) PRIMARY KEY,
+        discord_nick VARCHAR(255) NOT NULL,
+        discord_quintin_nick VARCHAR(255),
+        role integer NOT NULL,
+        avatar VARCHAR(255)
+        );`;
 
     return {
       createTable,

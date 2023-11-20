@@ -7,11 +7,14 @@ async function users(client) {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS characters (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        discord_id VARCHAR(255) NOT NULL,
         nickname VARCHAR(255) NOT NULL,
         class integer NOT NULL,
         level integer NOT NULL,
         c_level integer NOT NULL,
-        reputation integer
+        reputation integer,
+        CONSTRAINT fk_users FOREIGN KEY(discord_id) REFERENCES users(discord_id)
+
         )`;
 
     return {

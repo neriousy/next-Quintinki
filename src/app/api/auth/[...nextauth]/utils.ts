@@ -3,7 +3,9 @@ const ZASTEPCA_ID = '1089915139500814417';
 const ZARZADCA_ID = '1089558597387681823';
 const QUINTIN_ID = '1089557811610009740';
 
-export async function getDiscordUserInfo(access_token: string) {
+export async function getDiscordUserInfo(
+  access_token: string
+): Promise<{ role: number; nick: string }> {
   try {
     const server_id = process.env.DISCORD_QUINTIN_ID;
     const url = `https://discord.com/api/users/@me/guilds/${server_id}/member`;
@@ -14,30 +16,29 @@ export async function getDiscordUserInfo(access_token: string) {
     });
 
     const json = await response.json();
-    console.log(json);
 
     const { roles, nick } = json;
     const role = getHighestRole(roles);
 
     return { role, nick };
   } catch {
-    return { role: 'guest', nick: 'guest' };
+    return { role: 5, nick: 'Unknown' };
   }
 }
 
-function getHighestRole(roles: string[]) {
+// refactor later into single loop with priority
+function getHighestRole(roles: string[]): number {
   if (roles.includes(SZEF_ID)) {
-    return 'Szef';
+    return 1;
   }
   if (roles.includes(ZASTEPCA_ID)) {
-    return 'Zastępca';
+    return 2;
   }
   if (roles.includes(ZARZADCA_ID)) {
-    return 'Zarządca';
+    return 3;
   }
-
   if (roles.includes(QUINTIN_ID)) {
-    return 'Quintin';
+    return 4;
   }
-  return 'guest';
+  return 5;
 }

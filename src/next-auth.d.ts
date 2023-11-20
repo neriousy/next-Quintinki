@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import { ProviderType } from 'next-auth/providers';
 
 declare module 'next-auth' {
   /**
@@ -17,5 +18,17 @@ declare module 'next-auth' {
   interface Session {
     user?: User;
     nick?: string;
+  }
+
+  interface account {
+    token_type: string;
+    access_token: string;
+    refresh_token: string;
+    scope: string;
+    expires_in: number;
+    expires_at: number;
+    provider: string;
+    type: ProviderType;
+    providerAccountId: string;
   }
 }
